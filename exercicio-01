@@ -1,0 +1,33 @@
+/*
+ * EXERCICIO 01
+ */
+
+create table Livros(
+	id SERIAL primary key,
+	nome VARCHAR(255),
+	ano DATE,
+	reserva INTEGER,
+	prateleira INTEGER);
+
+insert into Livros (nome, ano, reserva, prateleira) values ('Senhor dos Anéis', '1954-01-01', 12, 24);
+insert into Livros (nome, ano, reserva, prateleira) values ('Harry potter e a pedra filosofal', '1997-01-01', 9, 23);
+insert into Livros (nome, ano, reserva, prateleira) values ('O Hobbit', '1937-01-01', 18, 26);
+insert into Livros (nome, ano, reserva, prateleira) values ('duna', '1984-01-01', 5, 26);
+
+select * from Livros 
+order by reserva;
+ 
+
+SELECT prateleira, avg(reserva) AS avg_reserva
+FROM Livros 
+GROUP BY prateleira;
+
+select id, nome, reserva 
+from Livros 
+where  reserva >
+	(select avg(reserva) 
+	 from Livros 
+     where prateleira = prateleira)
+     order by reserva desc;
+
+drop table Livros;
