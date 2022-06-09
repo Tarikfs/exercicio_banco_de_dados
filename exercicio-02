@@ -1,0 +1,87 @@
+/*
+ * EXERCICIO 02
+ */
+
+create table mentores(
+	mentor_id SERIAL primary key,
+	nome varchar(255),
+	sala varchar(255)
+	);
+
+insert into mentores (nome, sala) values ('Waren', 'Torvalds');
+insert into mentores (nome, sala) values ('Steven', 'Gates');
+insert into mentores (nome, sala) values ('Socrates', 'Jobs');
+
+select * from mentores 
+order by mentor_id;
+
+drop table mentores;
+
+create table posts(
+	post_id SERIAL primary key,
+	mentor_id SERIAL,
+	descricao varchar(255),
+	foreign key (mentor_id) 
+	references mentores(mentor_id)
+	);
+
+
+insert into posts (mentor_id, descricao) values (1, 'post 01');
+insert into posts (mentor_id, descricao) values (1, 'post 02');
+insert into posts (mentor_id, descricao) values (3, 'post 03');
+
+select * from posts 
+order by mentor_id;
+
+drop table posts;
+
+create table Curtidas(
+	mentor_id SERIAL,
+	post_id SERIAL,
+	foreign key (mentor_id) 
+	references Mentores(mentor_id),
+	foreign key (post_id) 
+	references Posts(post_id)
+	);
+
+
+INSERT INTO curtidas (mentor_id, post_id) VALUES (1, 1);
+INSERT INTO curtidas (mentor_id, post_id) VALUES (3, 2);
+INSERT INTO curtidas (mentor_id, post_id) VALUES (3, 3);
+
+select * from curtidas 
+order by mentor_id;
+
+drop table curtidas;
+
+/*
+ * PARTE 01
+ */
+
+select nome, count(curtidas.mentor_id) 
+as curtidas
+from mentores 
+inner join curtidas on curtidas.mentor_id = mentores.mentor_id 
+group by(nome);
+
+/*
+ * PARTE 02
+ */
+
+select sala, post_id 
+from mentores 
+inner join curtidas
+on mentores.mentor_id = curtidas.mentor_id
+order by post_id;
+
+/*
+ * PARTE 03
+ */
+
+select sala, avg(post_id)
+as media
+from mentores 
+inner join curtidas 
+on mentores.mentor_id = curtidas.mentor_id
+group by (sala)
+order by sala desc;
