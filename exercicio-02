@@ -12,11 +12,6 @@ insert into mentores (nome, sala) values ('Waren', 'Torvalds');
 insert into mentores (nome, sala) values ('Steven', 'Gates');
 insert into mentores (nome, sala) values ('Socrates', 'Jobs');
 
-select * from mentores 
-order by mentor_id;
-
-drop table mentores;
-
 create table posts(
 	post_id SERIAL primary key,
 	mentor_id SERIAL,
@@ -29,11 +24,6 @@ create table posts(
 insert into posts (mentor_id, descricao) values (1, 'post 01');
 insert into posts (mentor_id, descricao) values (1, 'post 02');
 insert into posts (mentor_id, descricao) values (3, 'post 03');
-
-select * from posts 
-order by mentor_id;
-
-drop table posts;
 
 create table Curtidas(
 	mentor_id SERIAL,
@@ -48,11 +38,6 @@ create table Curtidas(
 INSERT INTO curtidas (mentor_id, post_id) VALUES (1, 1);
 INSERT INTO curtidas (mentor_id, post_id) VALUES (3, 2);
 INSERT INTO curtidas (mentor_id, post_id) VALUES (3, 3);
-
-select * from curtidas 
-order by mentor_id;
-
-drop table curtidas;
 
 /*
  * PARTE 01
