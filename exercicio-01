@@ -14,14 +14,6 @@ insert into Livros (nome, ano, reserva, prateleira) values ('Harry potter e a pe
 insert into Livros (nome, ano, reserva, prateleira) values ('O Hobbit', '1937-01-01', 18, 26);
 insert into Livros (nome, ano, reserva, prateleira) values ('duna', '1984-01-01', 5, 26);
 
-select * from Livros 
-order by reserva;
- 
-
-SELECT prateleira, avg(reserva) AS avg_reserva
-FROM Livros 
-GROUP BY prateleira;
-
 select id, nome, reserva 
 from Livros 
 where  reserva >
@@ -29,5 +21,3 @@ where  reserva >
 	 from Livros 
      where prateleira = prateleira)
      order by reserva desc;
-
-drop table Livros;
